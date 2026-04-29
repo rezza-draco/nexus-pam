@@ -117,4 +117,4 @@ Nexus PAM uses a **Custom Proprietary License**. Read the full [LICENSE](LICENSE
 > **Community Edition is free** for internal use within a single organization.  
 > Commercial use, resale, or offering PAM as a service to third parties requires a paid license.
 
-📧 **Licensing inquiries:** nexuspam.technology@gmail.com
+📧 **Licensing inquiries:** rezza.zoel@gmail.com
