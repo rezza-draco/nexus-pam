@@ -30,10 +30,20 @@
 | 📁 File Transfer | Upload/download files over SSH |
 | 🎬 Session Recording | Record SSH sessions, export to MP4 |
 | 👥 Multi-role Auth | super_admin / admin / operator / user |
-| 🔐 LDAP / AD | Active Directory integration |
-| 🔑 AES-256-GCM | Encrypted credential storage |
+| 🔐 MFA (TOTP) | Two-factor authentication via Google Authenticator / Authy |
+| 🔑 LDAP / AD | Active Directory integration |
+| 🛡️ AES-256-GCM | Encrypted credential storage |
 | 📊 Audit Logs | All connection activity logged |
-| 🛡️ Rate Limiting | Brute-force protection on all login endpoints |
+| ⚡ Rate Limiting | Brute-force protection on all login endpoints |
+
+---
+
+## 🆕 What's New in v2.0.1
+
+- ✅ **Multi-Factor Authentication (MFA/TOTP)** — each user can enable 2FA via Google Authenticator or Authy
+- ✅ **MFA admin control** — super_admin can disable MFA for users who lose access to their authenticator
+- ✅ Fix CORS issue when accessing via server IP
+- ✅ Fix `connection_type` column missing after fresh install
 
 ---
 
@@ -41,12 +51,12 @@
 
 ### 1. Download the installer
 
-Go to the [**Releases**](../../releases/latest) page and download **`nexus-pam-installer.zip`**.
+Go to the [**Releases**](../../releases/latest) page and download **`nexus-pam-installer-v.2.0.1.zip`**.
 
 ### 2. Upload to your server
 
 ```bash
-scp nexus-pam-installer.zip user@YOUR_SERVER_IP:/home/user/
+scp nexus-pam-installer-v.2.0.1.zip user@YOUR_SERVER_IP:/home/user/
 ```
 
 ### 3. Extract and run
@@ -54,8 +64,7 @@ scp nexus-pam-installer.zip user@YOUR_SERVER_IP:/home/user/
 ```bash
 ssh user@YOUR_SERVER_IP
 cd /home/user/
-unzip nexus-pam-installer.zip -d nexus-pam/
-cd nexus-pam/
+unzip nexus-pam-installer-v.2.0.1.zip
 sudo bash install.sh
 ```
 
@@ -70,6 +79,26 @@ The installer will:
 
 ```
 http://YOUR_SERVER_IP/
+```
+
+---
+
+## 🔄 Update from Previous Version
+
+If you are already running Nexus PAM and want to update to v2.0.1:
+
+### 1. Download the update package
+
+Go to the [**Releases**](../../releases/latest) page and download **`nexus-pam-update-v.2.0.1.zip`**.
+
+### 2. Upload and run
+
+```bash
+scp nexus-pam-update-v.2.0.1.zip user@YOUR_SERVER_IP:/home/user/
+ssh user@YOUR_SERVER_IP
+cd /home/user/
+unzip nexus-pam-update-v.2.0.1.zip
+sudo bash update.sh
 ```
 
 ---
@@ -98,6 +127,7 @@ sudo bash uninstall.sh
 - Passwords hashed with **bcrypt (cost 12)**
 - Server credentials encrypted with **AES-256-GCM**
 - JWT authentication with **random 128-char secret per install**
+- MFA with **TOTP standard** (RFC 6238) — compatible with Google Authenticator, Authy, and any TOTP app
 - Rate limiting: **10 login attempts / 15 minutes per IP**
 - Security headers via **Helmet.js** (CSP, HSTS, X-Frame-Options)
 - All SQL queries use **parameterized statements** (no SQL injection)
